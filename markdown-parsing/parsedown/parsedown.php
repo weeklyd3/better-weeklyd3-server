@@ -11,7 +11,8 @@
 # For the full license information, view the LICENSE file that was distributed
 # with this source code.
 #
-#
+# Changes were made to the source code.
+# They are indicated in the comments.
 
 class Parsedown
 {
@@ -30,8 +31,14 @@ class Parsedown
 
         # trim line breaks
         $markup = trim($markup, "\n");
-
-        return $markup;
+        # Start of changes
+        require_once __DIR__ . '/../html-purifier/library/HTMLPurifier.auto.php';
+        
+        $config = HTMLPurifier_Config::createDefault();
+        $purifier = new HTMLPurifier($config);
+        $clean_html = $purifier->purify($markup);
+        # End of changes
+        return $clean_html;
     }
 
     protected function textElements($text)

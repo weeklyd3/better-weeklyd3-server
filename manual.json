@@ -102,5 +102,25 @@
                 "output": "\"SOME USERNAME\""
             }
         }
+    },
+    "Parse Markdown": {
+        "description": "This service parses Markdown just as it does with posts.",
+        "params": {
+            "text": "The text to parse"
+        },
+        "method": ["POST"],
+        "url": "parse.php",
+        "situations": {
+            "Nothing to parse": {
+                "description": "No $_POST['text'] variable was found.",
+                "success": false,
+                "output": "null"
+            },
+            "Parsed successfully": {
+                "description": "Text was included and parsed successfully.",
+                "success": true,
+                "output": "\"PARSED MARKDOWN HERE\""
+            }
+        }
     }
 }
