@@ -1,0 +1,106 @@
+{
+    "Log a user in": {
+        "description": "Making a POST request to this address attempts to log a user in. If login was completed successfully, a cookie with the name PHPSESSID is sent back. Otherwise, information on why the login failed is sent back.",
+        "params": {
+            "user": "Username",
+            "password": "Password"
+        },
+        "url": "login.php",
+        "method": [
+            "POST"
+        ],
+        "situations": {
+            "Malformed request type": {
+                "description": "A request type other than POST was made. Due to transport of passwords, only POST requests are allowed.",
+                "success": false,
+                "output": "{\n    \"status\": false,\n    \"message\": \"Only POST requests are allowed. Sorry.\",\n    \"data\": null\n}"
+            },
+            "Bad username": {
+                "description": "A username was entered that did not exist on the system",
+                "success": false,
+                "output": "{\n    \"status\": false,\n    \"message\": \"No such user\",\n    \"data\": null\n}"
+            },
+            "Bad password": {
+                "description": "The password given did not match the hash stored on the system",
+                "success": false,
+                "output": "{\n    \"status\": false,\n    \"message\": \"Wrong password\",\n    \"data\": null\n}"
+            },
+            "Username and password correct": {
+                "description": "Both a correct username and a correct password were specified.",
+                "success": true,
+                "output": "{\n    \"status\": true,\n    \"message\": \"Logged in successfully\",\n    \"data\": {\n        \"username\": \"SOME USERNAME HERE\"\n    }\n}"
+            }
+        }
+    },
+    "Log a user out": {
+        "url": "logout.php",
+        "description": "Making a POST request logs the user out. Making any other type of request does nothing.",
+        "method": [
+            "POST"
+        ],
+        "params": [],
+        "situations": {
+            "Method other than POST": {
+                "description": "A method other than POST was made.",
+                "success": false,
+                "output": "{\n    \"status\": false,\n    \"message\": \"Only POST requests are allowed. Sorry.\",\n    \"data\": null\n}"
+            },
+            "POST request": {
+                "description": "A POST request was made.",
+                "success": true,
+                "output": "{\n    \"status\": true,\n    \"message\": \"Logged out.\"\n}"
+            }
+        }
+    },
+    "Create an account": {
+        "description": "Register a new account on the system.",
+        "url": "createaccount.php",
+        "params": {
+            "username": "The username of the account to create.",
+            "password": "The password of the account to create."
+        },
+        "method": [
+            "POST"
+        ],
+        "situations": {
+            "Method other than POST": {
+                "description": "A method other than POST was made.",
+                "success": false,
+                "output": "{\n    \"status\": false,\n    \"message\": \"Only POST requests are allowed. Sorry.\",\n    \"data\": null\n}"
+            },
+            "Username already exists": {
+                "description": "The desired username is taken.",
+                "success": false,
+                "output": "{\n    \"status\": false,\n    \"message\": \"Username is taken\",\n    \"data\": null\n}"
+            },
+            "Registration successful": {
+                "description": "Registration was completed successfully.",
+                "success": true,
+                "output": "{\n    \"status\": true,\n    \"message\": \"User account created\",\n    \"data\": {\n        \"username\": \"SOME USERNAME HERE\",\n        \"sanitizedUsername\": \"SANITIZED VERSION OF USERNAME HERE\"\n    }\n}"
+            }
+        }
+    },
+    "Check if user is logged in": {
+        "description": "Returns a boolean containing whether or not the user is logged in with a valid username.",
+        "url": "assertLogin.php",
+        "params": [],
+        "method": ["Anything works"],
+        "situations": {
+            "User is not logged in": {
+                "description": "The user is not logged in.",
+                "success": true,
+                "output": "false"
+            },
+            "User is logged in, but username does not exist": {
+                "description": "Hrmmm. That is a bit weird. Maybe the account was deleted?",
+                "success": true,
+                "output": "false"
+            },
+            "User is logged in, and username exists": {
+                "description": "The user is logged in with a valid username.",
+                "success": true,
+                "output": "\"SOME USERNAME\""
+            }
+        }
+    }
+}
