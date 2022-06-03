@@ -9,6 +9,7 @@ $limit = $_GET['limit'] ?? 10;
 $blurbLength = $_GET['blurbLength'] ?? 300;
 $start = $offset;
 $end = $offset + $limit - 1;
+$articles = array_slice($articles, $start, $limit);
 $newarticles = array();
 foreach ($articles as $article) {
     $obj = new stdClass;
