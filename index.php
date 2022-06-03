@@ -3,10 +3,11 @@
     <title>API Documentation</title>
       <link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/vs.min.css" />
+      <link rel="stylesheet" href="https://harmlesswebsite.leoshi6.repl.co/style.css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
 <script>window.addEventListener('DOMContentLoaded', function() { hljs.highlightAll(); });</script>
   </head>
-  <body>
+  <body id="baudy">
     <h1>API Manual</h1>
       <p>This provides information for the requests made to the API.</p>
       <p>The manual is auto-generated based on some data. <a href="manual.json">Find the data here</a>.</p>

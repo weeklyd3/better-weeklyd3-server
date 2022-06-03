@@ -122,5 +122,28 @@
                 "output": "\"PARSED MARKDOWN HERE\""
             }
         }
+    },
+    "Post an article": {
+        "description": "Posts a new article to the site.",
+        "method": ["POST"],
+        "url": "newArticle.php",
+        "params": {"title": "Title of new article","contents":"Contents of new article"},
+        "situations": {
+            "User not logged in": {
+                "description": "The user was not logged in, or the session expired.",
+                "success": false,
+                "output": "JSON with status: false"
+            },
+            "Title or body missing": {
+                "description": "Title or body was missing",
+                "success": false,
+                "output": "JSON with status: false"
+            },
+            "Post completed": {
+                "description": "Posting was successful",
+                "success": true,
+                "output": "JSON with success: true"
+            }
+        }
     }
 }
